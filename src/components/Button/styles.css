@@ -17,7 +17,7 @@ button:disabled:hover {
     font-size: 18px;
     width: 100%;
     margin-top: 1rem;
-    font-weight: bold;
+    font-weight: norma;
 }
 .secondary {
     border: none;

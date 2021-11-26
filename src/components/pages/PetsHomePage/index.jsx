@@ -3,6 +3,8 @@ import { useEffect, useState, useContext } from "react";
 import{PetItem} from '../../PetItem'
 import PetsOrderContext from "../../../context/petsOrderContext";
 import {Search} from "../../Search";
+import {getAuth,onAuthStateChanged} from 'firebase/auth';
+import {useHistory} from 'react-router-dom';
 
 export const PetsHomePage = () => {
   const [pets, setPets] = useState([]);
@@ -10,7 +12,21 @@ export const PetsHomePage = () => {
   const [loading, setLoading]=useState(true);
   const globalState = useContext(PetsOrderContext);
   const [searchString, setSearchString] = useState('');
-  useEffect(
+
+const history = useHistory();
+
+useEffect(
+  ()=>{
+    const auth=getAuth();
+    onAuthStateChanged(auth, (user)=>{
+      if(!user){
+        history.push('/login');
+      }
+    })
+  }, []
+);
+
+useEffect(
     ()=>{
       getPets();
     }, []
